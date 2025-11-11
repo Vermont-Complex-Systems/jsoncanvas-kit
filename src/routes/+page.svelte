@@ -106,10 +106,10 @@
 
 <div id="container">
 	<div id="canvas-container">
-		<svg id="canvas-edges">
+		<svg id="canvas-edges" preserveAspectRatio="none">
 			<defs>
-				<marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-					<polygon points="0 0, 10 4, 0 8" fill="currentColor"/>
+				<marker id="arrowhead" viewBox="0 0 10 10" refX="0" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+					<path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
 				</marker>
 			</defs>
 			<g id="edge-paths"></g>
