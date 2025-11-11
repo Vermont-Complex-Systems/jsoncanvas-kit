@@ -195,13 +195,28 @@
 	:global(.node-text-content) {
 		overflow-y: auto;
 		overflow-x: hidden;
-		padding: 1rem;
-		height: calc(100% - 30px);
+		padding: 0 0.5rem 0 1rem;
+		height: 100%;
 		box-sizing: border-box;
+		position: relative;
+	}
+
+	:global(.node-text-content > *:first-child) {
+		margin-top: 1rem;
+	}
+
+	:global(.node-text-content > *:last-child) {
+		margin-bottom: 1rem;
 	}
 
 	:global(.node) {
 		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+
+	:global(.node-text) {
+		overflow: visible;
 	}
 
 	:global(#canvas-edges path) {

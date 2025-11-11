@@ -232,6 +232,38 @@ function drawEdges() {
       }
 
       svgContainer.appendChild(path);
+
+      // Add label if present
+      if (edge.label) {
+        const midX = (fromPoint.x + toPoint.x) / 2;
+        const midY = (fromPoint.y + toPoint.y) / 2;
+
+        // Create text element first to measure it
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', midX);
+        text.setAttribute('y', midY);
+        text.setAttribute('class', 'edge-label');
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('dominant-baseline', 'middle');
+        text.textContent = edge.label;
+
+        // Add background rectangle for better readability
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        const padding = 6;
+        // Approximate text width (will be adjusted after text is in DOM)
+        const textWidth = edge.label.length * 8;
+        const textHeight = 20;
+
+        rect.setAttribute('x', midX - textWidth / 2 - padding);
+        rect.setAttribute('y', midY - textHeight / 2 - padding / 2);
+        rect.setAttribute('width', textWidth + padding * 2);
+        rect.setAttribute('height', textHeight + padding);
+        rect.setAttribute('class', 'edge-label-bg');
+        rect.setAttribute('rx', '4');
+
+        svgContainer.appendChild(rect);
+        svgContainer.appendChild(text);
+      }
     }
   });
 }
