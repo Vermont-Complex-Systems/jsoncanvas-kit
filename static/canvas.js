@@ -214,11 +214,36 @@ function drawEdges() {
       const fromPoint = getAnchorPoint(fromNode, edge.fromSide);
       const toPoint = getAnchorPoint(toNode, edge.toSide);
 
-      const curveTightness = 0.75;
-      const controlPointX1 = fromPoint.x + (toPoint.x - fromPoint.x) * curveTightness;
-      const controlPointX2 = fromPoint.x + (toPoint.x - fromPoint.x) * (1 - curveTightness);
-      const controlPointY1 = fromPoint.y;
-      const controlPointY2 = toPoint.y;
+      // Calculate control point offset based on distance
+      const dx = Math.abs(toPoint.x - fromPoint.x);
+      const dy = Math.abs(toPoint.y - fromPoint.y);
+      const offset = Math.max(dx, dy) * 0.5;
+
+      // Set control points based on edge sides for proper arrow direction
+      let controlPointX1 = fromPoint.x;
+      let controlPointY1 = fromPoint.y;
+      let controlPointX2 = toPoint.x;
+      let controlPointY2 = toPoint.y;
+
+      // First control point extends from the fromSide
+      if (edge.fromSide === 'right') controlPointX1 += offset;
+      else if (edge.fromSide === 'left') controlPointX1 -= offset;
+      else if (edge.fromSide === 'bottom') controlPointY1 += offset;
+      else if (edge.fromSide === 'top') controlPointY1 -= offset;
+
+      // Second control point: position to make arrow point in correct direction
+      // For vertical arrows, keep X aligned; for horizontal arrows, keep Y aligned
+      if (edge.toSide === 'right') {
+        controlPointX2 -= offset;  // CP left of endpoint → arrow points right
+      } else if (edge.toSide === 'left') {
+        controlPointX2 += offset;  // CP right of endpoint → arrow points left
+      } else if (edge.toSide === 'top') {
+        controlPointX2 = toPoint.x;  // Keep X aligned for vertical approach
+        controlPointY2 -= offset;    // CP above endpoint → arrow points down
+      } else if (edge.toSide === 'bottom') {
+        controlPointX2 = toPoint.x;  // Keep X aligned for vertical approach
+        controlPointY2 += offset;    // CP below endpoint → arrow points up
+      }
 
       const d = `M ${fromPoint.x} ${fromPoint.y} C ${controlPointX1} ${controlPointY1}, ${controlPointX2} ${controlPointY2}, ${toPoint.x} ${toPoint.y}`;
 
