@@ -13,15 +13,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "main.canvas",
+                "file": "second.canvas",
                 "viewState": {
-                  "x": 90,
-                  "y": 71.05925903320312,
+                  "x": 0,
+                  "y": 0,
                   "zoom": 0
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "main"
+              "title": "second"
             }
           }
         ]
@@ -174,10 +174,11 @@
   },
   "active": "0f6e29742202f5b9",
   "lastOpenFiles": [
+    "advanced.md",
+    "main.canvas",
     "canvas.js.tmp.34235.1762896218093",
     "welcome.md",
     "small-but-qualitative-data.md",
-    "main.canvas",
     "big-observational-data.md",
     "survey-data.md",
     "team-data-annotations.md",
